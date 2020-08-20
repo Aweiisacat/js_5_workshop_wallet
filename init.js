@@ -27,7 +27,33 @@ function getValue() {
 
 function saveValue(value) {
   const records = JSON.parse(localStorage.getItem('records')) || [];
-  records.push(value);
+  records.unshift(value);
   localStorage.setItem('records', JSON.stringify(records));
-  console.log(JSON.parse(localStorage.getItem('records')));
 }
+
+
+function template() {
+  const data = JSON.parse(localStorage.getItem('records'));
+  const tbody = document.getElementById('records-panel');
+  const Element = 
+  `<tr class="item">
+    <th scope="row">
+      ${data[0].date}
+    </th>
+    <td>
+      ${data[0].category}
+    </td>
+    <td>
+      ${data[0].description}
+    </td>
+    <td>
+      ${data[0].amount}
+    </td>
+    <td>
+      <span class="remove">x</span>
+    </td>
+  </tr>`
+  tbody.innerHTML = Element;
+}
+
+template();
