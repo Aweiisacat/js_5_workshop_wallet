@@ -29,31 +29,30 @@ function saveValue(value) {
   const records = JSON.parse(localStorage.getItem('records')) || [];
   records.unshift(value);
   localStorage.setItem('records', JSON.stringify(records));
+  location.reload()
 }
-
 
 function template() {
   const data = JSON.parse(localStorage.getItem('records'));
   const tbody = document.getElementById('records-panel');
-  const Element = 
-  `<tr class="item">
+  data.map(element => tbody.innerHTML +=
+    `<tr class="item">
     <th scope="row">
-      ${data[0].date}
+      ${element.date}
     </th>
     <td>
-      ${data[0].category}
+      ${element.category}
     </td>
     <td>
-      ${data[0].description}
+      ${element.description}
     </td>
     <td>
-      ${data[0].amount}
+      ${element.amount}
     </td>
     <td>
       <span class="remove">x</span>
     </td>
   </tr>`
-  tbody.innerHTML = Element;
+  )
 }
-
 template();
